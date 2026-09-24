@@ -1,0 +1,12 @@
+```text
+node_modules/
+npm-debug.log*
+.env
+.env.test
+.git/
+.gitignore
+logs/
+uploads/
+coverage/
+test/
+```

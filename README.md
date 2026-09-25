@@ -87,18 +87,18 @@ shipnow/
 ├── uploads/
 ├── logs/
 ├── .dockerignore
-├── .env
 ├── .env.example
-├── .env.test
 ├── .gitignore
 ├── Dockerfile
 ├── docker-compose.yml
 ├── package.json
 └── README.md
 
+.env, .env.test, node_modules, logs, uploads locales y coverage no forman parte del repositorio.
+
 Instalación
 
-Requisitos:
+Requisitos
 
 Node.js 24 o superior
 
@@ -121,6 +121,8 @@ JWT_SECRET=your_jwt_secret_here
 
 No subir el archivo .env al repositorio.
 
+También se incluye .env.example con las variables necesarias para configurar el proyecto.
+
 Ejecución local
 
 Para iniciar el servidor:
@@ -131,9 +133,9 @@ La API estará disponible en:
 
 http://localhost:8080
 
-Endpoint de health check:
+Health check
 
-GET http://localhost:8080/health
+GET /health
 
 Respuesta esperada:
 
@@ -148,7 +150,15 @@ El proyecto incluye un Dockerfile multi-stage y un archivo docker-compose.yml.
 
 Para construir y levantar la API junto con MongoDB:
 
+docker-compose up --build
+
+También puede utilizarse la sintaxis moderna equivalente:
+
 docker compose up --build
+
+Una vez construidas las imágenes, para levantar los servicios normalmente:
+
+docker-compose up
 
 Los servicios utilizados son:
 
@@ -158,11 +168,11 @@ MongoDB: localhost:27017
 
 Para comprobar el estado de los contenedores:
 
-docker compose ps
+docker-compose ps
 
 Para detener los servicios:
 
-docker compose down
+docker-compose down
 
 La configuración de Docker utiliza un volumen persistente para MongoDB, por lo que los datos no se pierden al detener los contenedores.
 
@@ -349,22 +359,27 @@ DELETE
 
 Eliminar entrega
 
-Estados de seguimiento
-
-Las entregas utilizan los siguientes estados:
-
-En preparación
-Despachado
-Enviado
-Recibido
-
-Cada cambio de estado se registra en un historial con su fecha y hora.
-
 Mocks
 
 GET /api/mocks/users/:quantity
 
 Permite generar usuarios de prueba para testing y desarrollo.
+
+Para consultar todos los endpoints, permisos, parámetros y respuestas disponibles, se puede utilizar la documentación de Swagger.
+
+Estados de seguimiento
+
+Las entregas utilizan los siguientes estados:
+
+En preparación
+
+Despachado
+
+Enviado
+
+Recibido
+
+Cada cambio de estado se registra en un historial con su fecha y hora.
 
 Manejo de archivos
 
@@ -382,9 +397,11 @@ Tamaño máximo:
 
 5 MB
 
-Los archivos cargados se almacenan en el directorio:
+Los archivos cargados se almacenan localmente en el directorio:
 
 uploads/
+
+La carpeta uploads/ está excluida del repositorio mediante .gitignore. Los archivos generados durante pruebas locales no deben subirse al repositorio.
 
 Manejo de errores
 
@@ -427,7 +444,7 @@ Los logs se almacenan en el directorio:
 
 logs/
 
-El directorio está excluido del repositorio mediante .gitignore.
+El directorio está excluido del repositorio mediante .gitignore. Los logs generados localmente no deben subirse a GitHub.
 
 Testing
 
@@ -545,6 +562,8 @@ Docker Compose
 
 Health check de MongoDB
 
-Autor: Tomás Rodriguez Pena
+Autor
+
+Tomás Rodriguez Pena
 
 Proyecto final correspondiente a Backend 3.
